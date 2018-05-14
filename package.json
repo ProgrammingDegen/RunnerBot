@@ -1,0 +1,11 @@
+{
+  "name": "greeter-bot",
+  "version": "0.0.1",
+  "description": "A proprietary bot.",
+  "main": "bot.js",
+  "author": "WhITelion",
+  "dependencies": {
+    "discord.js": "^11.3.0",
+    "node": "^9.5.0"
+  }
+}
