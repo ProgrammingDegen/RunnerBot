@@ -1,0 +1,12 @@
+{
+  "name": "RunnerBot",
+  "version": "0.0.1",
+  "description": "A bot in the works.",
+  "main": "bot.js",
+  "author": "WhITelion",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "node": "^9.5.0",
+    "node.js": "0.0.0"
+  }
+}
