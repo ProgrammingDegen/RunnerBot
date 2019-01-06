@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (Discord, config, fs, client, message, args) => {
 	try {
 		await message.channel.send("List of available commands:");
 		let cmd = "";

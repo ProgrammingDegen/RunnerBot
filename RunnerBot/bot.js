@@ -31,7 +31,6 @@ client.on("ready", async () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   client.user.setActivity(`on ${client.guilds.size} servers`);
   console.log(client.commands);
-
   // Feed bot invite link with full permissions to console 
   try {
 	let link = await client.generateInvite(["ADMINISTRATOR"]);
@@ -71,7 +70,7 @@ client.on("message", async message => {
 
   command = client.commands.get(command);
   if(command) {
-    command.run(client, message, args);
+    command.run(Discord, config, fs, client, message, args);
   }
 });
 

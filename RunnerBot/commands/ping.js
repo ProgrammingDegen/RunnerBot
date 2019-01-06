@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (Discord, config, fs, client, message, args) => {
 	// Calculates ping between sending a message and editing it, giving a nice round-trip latency
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
 	try {
