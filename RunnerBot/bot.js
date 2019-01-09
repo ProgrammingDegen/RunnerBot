@@ -9,13 +9,9 @@ const fs = require("fs");
 // Load firebase
 const firebase = require("firebase");
 // Initialize Firebase
-const firebaseConfig = {
-  "apiKey": "<AIzaSyBitVNkFhDUyAygX19NWkp4a6IJ1B4asEs>",
-  "authDomain": "runnerbot-4a8b3.firebaseapp.com",
-  "databaseURL": "https://runnerbot-4a8b3.firebaseio.com",
-  "storageBucket": "runnerbot-4a8b3.appspot.com",
-}
+const firebaseConfig = require("./firebaseconfig.json");
 firebase.initializeApp(firebaseConfig);
+// TODO Time-based updates for SNH lobby
 
 // Client and Guild
 const client = new Discord.Client();

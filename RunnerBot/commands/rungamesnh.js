@@ -1,4 +1,5 @@
 module.exports.run = async (Discord, config, fs, firebase, client, message, args) => {
+	// TODO rewrite the help description
 	try {
 		if (typeof args[0] === "undefined" || args[0] === "help") {
 			let embed = new Discord.RichEmbed()
