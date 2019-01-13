@@ -1,10 +1,12 @@
-module.exports.run = async (Discord, config, fs, firebase, client, message, args) => {
+module.exports.run = async (Discord, config, firebase, client, message, args) => {
+	// TODO EVERYTHING
 	try {
 		if (typeof args[0] === "undefined" || args[0] === "help") {
 			let embed = new Discord.RichEmbed()
-				.setAuthor("RunnerBot")
+				.setAuthor(`${config.bot_name}`, `${config.bot_avatar_url}`)
 				.setTitle("role")
-				.setDescription(`[I promise to mark up everything later]\n`);
+				.setDescription(`[I promise to mark up everything later]\n`)
+				.setThumbnail(`${config.bot_avatar_url}`);
 			await message.channel.send(embed);
 			return;
 		}
@@ -15,7 +17,7 @@ module.exports.run = async (Discord, config, fs, firebase, client, message, args
 		console.log(err.stack);
 	}
 }
-// TODO EVERYTHING
+
 module.exports.help = {
 	"name": "role"
 }

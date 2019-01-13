@@ -1,4 +1,4 @@
-module.exports.run = async (Discord, config, fs, firebase, client, message, args) => {
+module.exports.run = async (Discord, config, firebase, client, message, args) => {
     // Command removes all messages from all users in the channel, up to 100 
     // Get the delete count, as an actual number (Base 10)
     const deleteCount = parseInt(args[0], 10);

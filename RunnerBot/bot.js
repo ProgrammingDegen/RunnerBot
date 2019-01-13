@@ -6,17 +6,15 @@ const config = require("./config.json");
 // config.prefix contains the message prefix
 // File I/O
 const fs = require("fs");
+const client = new Discord.Client();
+const guild = new Discord.Guild();
 // Load firebase
 const firebase = require("firebase");
 // Initialize Firebase
+// firebaseconfig.json contains firebase config data
 const firebaseConfig = require("./firebaseconfig.json");
 firebase.initializeApp(firebaseConfig);
-// TODO Time-based updates for SNH lobby
-
-// Client and Guild
-const client = new Discord.Client();
-const guild = new Discord.Guild();
-
+// Get command list for command handler
 client.commands = new Discord.Collection();
 fs.readdir("./commands/", (err, files) => {
 	if(err) console.error(err);
@@ -76,7 +74,7 @@ client.on("message", async message => {
 
   command = client.commands.get(command);
   if(command) {
-    command.run(Discord, config, fs, firebase, client, message, args);
+    command.run(Discord, config, firebase, client, message, args);
   }
 });
 

@@ -1,12 +1,13 @@
-module.exports.run = async (Discord, config, fs, firebase, client, message, args) => {
-	// TODO rewrite the help description
+module.exports.run = async (Discord, config, firebase, client, message, args) => {
 	try {
 		if (typeof args[0] === "undefined" || args[0] === "help") {
 			let embed = new Discord.RichEmbed()
-				.setAuthor("RunnerBot")
+				.setAuthor(`${config.bot_name}`, `${config.bot_avatar_url}`)
 				.setTitle("rungamesnh")
-				.setDescription("[I promise to mark up everything later]\nInitiate a game of SNH.\nStart by mentioning 2 players. The players must then confirm their entries in the channel that the command was started in 5 minutes for the game to be hosted.\n"+
-					"Rules of the game:\n[TEST]\n"+`Command signature:\n${config.prefix}rungamesnh [@PLAYER1] [@PLAYER2] [MODE (Optional)]\nMode signatures: [I haven't thought this far yet]`);
+				.setDescription("Initiate a game of SNH.\nStart by mentioning 2 players. The players must then confirm their entries in the channel that the command was started in 5 minutes for the game to be hosted.\n"+
+					`Rules of the game: Please visit ${config.prefix}snh rules.\n`+"Arguments:\n[@PLAYER1] [@PLAYER2]: Start a game lobby with Player 1 and Player 2.\nready: Announce yourself as ready for the game.\n"+
+					"cancel / -c: Cancel the game.\nAll arguments are case-sensitive.")
+				.setThumbnail(`${config.bot_avatar_url}`);
 			await message.channel.send(embed);
 			return;
 		}
@@ -14,19 +15,19 @@ module.exports.run = async (Discord, config, fs, firebase, client, message, args
 			return;
 		}
 		if (args[0] === "ready") {
-			let command = require("./rungamesnh/lobby.js");
+			let command = require("./rungamesnh/snhLobby.js");
 			let p1 = null;
 			let p2 = null;
 			let modeargs = "ready";
-			command.run(Discord, config, fs, firebase, client, message, p1, p2, modeargs);
+			command.run(Discord, config, firebase, client, message, p1, p2, modeargs);
 			return;
 		}
 		else if (args[0] === "-c" || args[0] === "cancel") {
-			let command = require("./rungamesnh/lobby.js");
+			let command = require("./rungamesnh/snhLobby.js");
 			let p1 = null;
 			let p2 = null;
 			let modeargs = "cancel";
-			command.run(Discord, config, fs, firebase, client, message, p1, p2, modeargs);
+			command.run(Discord, config, firebase, client, message, p1, p2, modeargs);
 			return;
 		}
 		const players = message.mentions.members;
@@ -45,13 +46,13 @@ module.exports.run = async (Discord, config, fs, firebase, client, message, args
 				await message.channel.send("You can't just do that without getting away with it.");
 				return;
 				}
-			// if (message.mentions.users.get(p1).bot || message.mentions.users.get(p2).bot) {
-			// 	await message.channel.send("Starting a game with a bot? Really?");
-			// 	return;
-			// }
+			if (message.mentions.users.get(p1).bot || message.mentions.users.get(p2).bot) {
+				await message.channel.send("Starting a game with a bot? Really?");
+				return;
+			}
 			let modeargs = "none";
-			let command = require("./rungamesnh/lobby.js");
-			command.run(Discord, config, fs, firebase, client, message, p1, p2, modeargs);
+			let command = require("./rungamesnh/snhLobby.js");
+			command.run(Discord, config, firebase, client, message, p1, p2, modeargs);
 			return;
 		}
 	} catch(err) {
