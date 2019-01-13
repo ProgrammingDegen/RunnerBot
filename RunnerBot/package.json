@@ -1,7 +1,9 @@
 {
   "name": "RunnerBot",
-  "version": "0.0.1",
-  "description": "A bot in the works.",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "RunnerBot, a bot designed to help you run away from life's problems. All rights reserved.",
   "main": "bot.js",
   "author": "WhITelion",
   "dependencies": {
