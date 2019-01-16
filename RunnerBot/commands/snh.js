@@ -20,7 +20,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args) =>
 				"A target number will be shown each round, all of which are natural numbers and can be made using the numbers and signs on the board.\n"+
 				"When a target number is revealed, you must recall the numbers and signs behind the board and complete an equation that results in the target number.\n"+
 				"The rules for the equation are:\nOne: Equations must consist of two numbers and one sign.\nTwo: You may not use a number or sign more than once.\n"+
-				"Three: When the target number is revealed, the player who presses the buzzer first will get to answer. If the turn player answers incorrectly, their opponent will be given a chance to answer.\n"+
+				"Three: When the target number is revealed, the player who presses the buzzer first will get to answer within 5 seconds. If the turn player answers incorrectly, their opponent will be given a chance to answer without a time limit.\n"+
 				"Four: You must answer by typing out the three letters in the order of number->sign->number. When using the sqrt expression, you must answer in the order of x->sqrt->y.\n"+
 				"The two players will take turns answering until the target number is made.\n"+
 				"The first player to make the target number gains 1 point. If you complete an equation with the sqrt operation, you will gain 2 points.\n"+
