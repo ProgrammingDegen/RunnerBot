@@ -1,6 +1,6 @@
 module.exports.run = (args) => {
 	let gameBoard = args;
-	if (gameBoard.indexOf("B") === -1) {
+	if (gameBoard === "ALIEYOUMSTNRHDGK") {
 		gameBoard ="`-------------------------\n" +
 					"|  " + gameBoard.charAt(0) + "  |  " + gameBoard.charAt(1) + "  |  " + gameBoard.charAt(2) + "  |  " + gameBoard.charAt(3) + "  |\n" +
 		 			"-------------------------\n" +

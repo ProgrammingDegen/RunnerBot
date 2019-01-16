@@ -69,9 +69,27 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						}
 						else {
 							await db.ref("lobbySNH/" + chnid).update({
-								"player1": pid1.slice(0, -1)+"Y"
+								"player1": pid1.slice(0, -1)+"Y",
+								"gameTimer": 1
 							});
-							await message.channel.send("Answer rights go to Player 1.");
+							await message.channel.send("Answer rights go to Player 1. You have 5 seconds.");
+							let schedule = require("node-schedule");
+							schedule.scheduleJob(Date.now() + 5000, async function() {
+								let timer = await db.ref("lobbySNH/" + chnid + "/" + "gameTimer").once("value");
+								let readiness = await db.ref("lobbySNH/" + chnid + "/" + "player1").once("value");
+								timer = timer.val();
+								readiness = readiness.val();
+								if (timer === 0) { return; }
+								else if (readiness.slice(-1) === "Y") {
+									await db.ref("lobbySNH/" + chnid).update({
+										"player1": pid1.slice(0, -1)+"N",
+										"player2": pid2.slice(0, -1)+"Y",
+										"gameTimer": 0
+									});
+									await message.channel.send("5 seconds have passed. It is now Player 2's turn.");
+									return;
+								}
+							});
 							return;
 						}
 					}
@@ -88,7 +106,24 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 							await db.ref("lobbySNH/" + chnid).update({
 								"player2": pid2.slice(0, -1)+"Y"
 							});
-							await message.channel.send("Answer rights go to Player 2.");
+							await message.channel.send("Answer rights go to Player 2. You have 5 seconds.");
+							let schedule = require("node-schedule");
+							schedule.scheduleJob(Date.now() + 5000, async function() {
+								let timer = await db.ref("lobbySNH/" + chnid + "/" + "gameTimer").once("value");
+								let readiness = await db.ref("lobbySNH/" + chnid + "/" + "player2").once("value");
+								timer = timer.val();
+								readiness = readiness.val();
+								if (timer === 0) { return; }
+								else if (readiness.slice(-1) === "Y") {
+									await db.ref("lobbySNH/" + chnid).update({
+										"player1": pid1.slice(0, -1)+"Y",
+										"player2": pid2.slice(0, -1)+"N",
+										"gameTimer": 0
+									});
+									await message.channel.send("5 seconds have passed. It is now Player 1's turn.");
+									return;
+								}
+							});
 							return;
 						}
 					}
@@ -130,7 +165,8 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						if (isCorrect[0] === 0) {
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"N",
-								"player2": pid2.slice(0, -1)+"Y"
+								"player2": pid2.slice(0, -1)+"Y",
+								"gameTimer": 0
 							});
 							await message.channel.send("Your equation is: " + isCorrect[1] + " " + isCorrect[2] + " " + isCorrect[3] + "." + "\nYou have 5 seconds to memorize this result.").then((msg) => {
 								msg.delete(5000);
@@ -166,7 +202,8 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"N",
 								"player2": pid2.slice(0, -1)+"N",
-								"gameTarget": null
+								"gameTarget": null,
+								"gameTimer": 0
 							});
 							await message.channel.send("Your equation is: " + isCorrect[1] + " " + isCorrect[2] + " " + isCorrect[3] + "." + "\nYou have 5 seconds to memorize this result.").then((msg) => {
 								msg.delete(5000);
@@ -235,7 +272,8 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						if (isCorrect[0] === 0) {
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"Y",
-								"player2": pid2.slice(0, -1)+"N"
+								"player2": pid2.slice(0, -1)+"N",
+								"gameTimer": 0
 							});
 							await message.channel.send("Your equation is: " + isCorrect[1] + " " + isCorrect[2] + " " + isCorrect[3] + "." + "\nYou have 5 seconds to memorize this result.").then((msg) => {
 								msg.delete(5000);
@@ -271,7 +309,8 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"N",
 								"player2": pid2.slice(0, -1)+"N",
-								"gameTarget": null
+								"gameTarget": null,
+								"gameTimer": 0
 							});
 							await message.channel.send("Your equation is: " + isCorrect[1] + " " + isCorrect[2] + " " + isCorrect[3] + "." + "\nYou have 5 seconds to memorize this result.").then((msg) => {
 								msg.delete(5000);
