@@ -110,7 +110,7 @@ module.exports.run = async (Discord, config, firebase, client, message, p1, p2, 
 						});
 						await message.channel.send("Player 2 ready.");
 						if (pid1.slice(-1) === "Y") {
-							let gameState = require("./snhGameStateGeneratorSNH.js");
+							let gameState = require("./snhGameStateGenerator.js");
 							gameState = gameState.run();
 							let modeargs = "startup";
 							let command = require("../snh/snhGameCommandCenter.js");

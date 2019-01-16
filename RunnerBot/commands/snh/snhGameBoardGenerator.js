@@ -22,13 +22,21 @@ module.exports.run = (args) => {
 		 			"|  " + gameBoard.charAt(12) + "  |  " + gameBoard.charAt(13) + "  |  " + gameBoard.charAt(14) + "  |  " + gameBoard.charAt(15) + "  |\n" +
 		 			"-------------------------\n" + "`";
 		let index = gameBoard.indexOf("Z");
-		gameBoard = gameBoard.substr(0, index-1) + "10" + gameBoard.substr(index+1);
+		if (index != -1) {
+			gameBoard = gameBoard.substr(0, index-1) + "10" + gameBoard.substr(index+1);	
+		}
 		index = gameBoard.indexOf("J");
-		gameBoard = gameBoard.substr(0, index-1) + "11" + gameBoard.substr(index+1);
+		if (index != -1) {
+			gameBoard = gameBoard.substr(0, index-1) + "11" + gameBoard.substr(index+1);
+		}
 		index = gameBoard.indexOf("Q");
-		gameBoard = gameBoard.substr(0, index-1) + "12" + gameBoard.substr(index+1);
+		if (index != -1) {
+			gameBoard = gameBoard.substr(0, index-1) + "12" + gameBoard.substr(index+1);
+		}
 		index = gameBoard.indexOf("B");
-		gameBoard = gameBoard.substr(0, index) + "\u221A" + gameBoard.substr(index+1);
+		if (index != -1) {
+			gameBoard = gameBoard.substr(0, index) + "\u221A" + gameBoard.substr(index+1);
+		}
 	}
 	return gameBoard;
 };

@@ -152,6 +152,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								let schedule = require("node-schedule");
 								schedule.scheduleJob(Date.now() + 5000, async function() {
 									// Reprint the board and start again
+									message.delete();
 									gameBoard = "ALIEYOUMSTNRHDGK";
 									gameBoard = command.run(gameBoard);
 									msg.edit("Game Board:\n" + gameBoard);
@@ -193,6 +194,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 									let schedule = require("node-schedule");
 									schedule.scheduleJob(Date.now() + 5000, async function() {
 										// Reprint the board, get a new target and start again
+										message.delete();
 										gameBoard = "ALIEYOUMSTNRHDGK";
 										gameBoard = command.run(gameBoard);
 										msg.edit("Game Board:\n" + gameBoard);
@@ -255,6 +257,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								let schedule = require("node-schedule");
 								schedule.scheduleJob(Date.now() + 5000, async function() {
 									// Reprint the board and start again
+									message.delete();
 									gameBoard = "ALIEYOUMSTNRHDGK";
 									gameBoard = command.run(gameBoard);
 									msg.edit("Game Board:\n" + gameBoard);
@@ -297,6 +300,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 									let schedule = require("node-schedule");
 									schedule.scheduleJob(Date.now() + 5000, async function() {
 										// Reprint the board, get a new target and start again
+										message.delete();
 										gameBoard = "ALIEYOUMSTNRHDGK";
 										gameBoard = command.run(gameBoard);
 										msg.edit("Game Board:\n" + gameBoard);
