@@ -79,6 +79,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								let readiness = await db.ref("lobbySNH/" + chnid + "/" + "player1").once("value");
 								timer = timer.val();
 								readiness = readiness.val();
+								if (timer === null || readiness === null) { return; }
 								if (timer === 0) { return; }
 								else if (readiness.slice(-1) === "Y") {
 									await db.ref("lobbySNH/" + chnid).update({
@@ -104,7 +105,8 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						}
 						else {
 							await db.ref("lobbySNH/" + chnid).update({
-								"player2": pid2.slice(0, -1)+"Y"
+								"player2": pid2.slice(0, -1)+"Y",
+								"gameTimer": 1
 							});
 							await message.channel.send("Answer rights go to Player 2. You have 5 seconds.");
 							let schedule = require("node-schedule");
@@ -113,6 +115,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								let readiness = await db.ref("lobbySNH/" + chnid + "/" + "player2").once("value");
 								timer = timer.val();
 								readiness = readiness.val();
+								if (timer === null || readiness === null) { return; }
 								if (timer === 0) { return; }
 								else if (readiness.slice(-1) === "Y") {
 									await db.ref("lobbySNH/" + chnid).update({
@@ -163,6 +166,9 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						let isCorrect = command.run(args[0], gameState, gameTarget);
 						// If wrong answer, pass turn to the other player
 						if (isCorrect[0] === 0) {
+							for (let i = 1; i < isCorrect.length; i++) {
+								if (isCorrect[i] === "B") { isCorrect[i] = "\u221A"; }
+							}
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"N",
 								"player2": pid2.slice(0, -1)+"Y",
@@ -176,6 +182,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								if (isCorrect[i] === 10) { isCorrect[i] = "Z"; }
 								else if (isCorrect[i] === 11) { isCorrect[i] = "J"; }
 								else if (isCorrect[i] === 12) { isCorrect[i] = "Q"; }
+								else if (isCorrect[i] === "\u221A") { isCorrect[i] = "B"; }
 							}
 							let gameBoard = "ALIEYOUMSTNRHDGK";
 							for (let i = 1; i < isCorrect.length; i++) {
@@ -199,6 +206,9 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						}
 						// If right answer, continue the game until someone reaches 10 points
 						else {
+							for (let i = 1; i < isCorrect.length; i++) {
+								if (isCorrect[i] === "B") { isCorrect[i] = "\u221A"; }
+							}
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"N",
 								"player2": pid2.slice(0, -1)+"N",
@@ -212,6 +222,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								if (isCorrect[i] === 10) { isCorrect[i] = "Z"; }
 								else if (isCorrect[i] === 11) { isCorrect[i] = "J"; }
 								else if (isCorrect[i] === 12) { isCorrect[i] = "Q"; }
+								else if (isCorrect[i] === "\u221A") { isCorrect[i] = "B"; }
 							}
 							await message.channel.send("Correct answer. You have gained " + isCorrect[0] + " point(s).\nThe number of points you have now is: " + parseInt(dbFetch["player1Score"]+isCorrect[0]) + ".");
 							if (dbFetch["player1Score"]+isCorrect[0] >= 10) {
@@ -270,6 +281,9 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						let isCorrect = command.run(args[0], gameState, gameTarget);
 						// If wrong answer, pass turn to the other player
 						if (isCorrect[0] === 0) {
+							for (let i = 1; i < isCorrect.length; i++) {
+								if (isCorrect[i] === "B") { isCorrect[i] = "\u221A"; }
+							}
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"Y",
 								"player2": pid2.slice(0, -1)+"N",
@@ -283,6 +297,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								if (isCorrect[i] === 10) { isCorrect[i] = "Z"; }
 								else if (isCorrect[i] === 11) { isCorrect[i] = "J"; }
 								else if (isCorrect[i] === 12) { isCorrect[i] = "Q"; }
+								else if (isCorrect[i] === "\u221A") { isCorrect[i] = "B"; }
 							}
 							let gameBoard = "ALIEYOUMSTNRHDGK";
 							for (let i = 1; i < isCorrect.length; i++) {
@@ -306,6 +321,9 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 						}
 						// If right answer, continue the game until someone reaches 10 points
 						else {
+							for (let i = 1; i < isCorrect.length; i++) {
+								if (isCorrect[i] === "B") { isCorrect[i] = "\u221A"; }
+							}
 							await db.ref("lobbySNH/" + chnid).update({
 								"player1": pid1.slice(0, -1)+"N",
 								"player2": pid2.slice(0, -1)+"N",
@@ -319,6 +337,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 								if (isCorrect[i] === 10) { isCorrect[i] = "Z"; }
 								else if (isCorrect[i] === 11) { isCorrect[i] = "J"; }
 								else if (isCorrect[i] === 12) { isCorrect[i] = "Q"; }
+								else if (isCorrect[i] === "\u221A") { isCorrect[i] = "B"; }
 							}
 							await message.channel.send("Correct answer. You have gained " + isCorrect[0] + " point(s).\nThe number of points you have now is: " + parseInt(dbFetch["player2Score"]+isCorrect[0]) + ".");
 							if (dbFetch["player2Score"]+isCorrect[0] >= 10) {

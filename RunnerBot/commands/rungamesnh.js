@@ -5,7 +5,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args) =>
 				.setAuthor(`${config.bot_name}`, `${config.bot_avatar_url}`)
 				.setTitle("rungamesnh")
 				.setDescription("Initiate a game of SNH.\nStart by mentioning 2 players. The players must then confirm their entries in the channel that the command was started in 5 minutes for the game to be hosted.\n"+
-					`Rules of the game: Please visit ${config.prefix}snh rules.\n`+"Arguments:\n[@PLAYER1] [@PLAYER2]: Start a game lobby with Player 1 and Player 2.\nready: Announce yourself as ready for the game.\n"+
+					`Rules of the game: Please visit "${config.prefix}snh rules".\n`+"Arguments:\n[@PLAYER1] [@PLAYER2]: Start a game lobby with Player 1 and Player 2.\nready: Announce yourself as ready for the game.\n"+
 					"cancel / -c: Cancel the game.\nAll arguments are case-sensitive.")
 				.setThumbnail(`${config.bot_avatar_url}`);
 			await message.channel.send(embed);

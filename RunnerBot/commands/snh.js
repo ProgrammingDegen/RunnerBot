@@ -4,7 +4,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args) =>
 			let embed = new Discord.RichEmbed()
 				.setAuthor(`${config.bot_name}`, `${config.bot_avatar_url}`)
 				.setTitle("snh")
-				.setDescription(`The command for the actual SNH game itself.\nFor how to play the game, try ${config.prefix}snh rules.\n`+
+				.setDescription(`The command for the actual SNH game itself.\nFor how to play the game, try "${config.prefix}snh rules".\n`+
 					`Arguments:\nb: Press the buzzer for the answer rights. Have to be lowercase.\n[3 game board letters]: Answer the question. Have to be uppercase.`)
 				.setThumbnail(`${config.bot_avatar_url}`);
 			await message.channel.send(embed);
@@ -24,7 +24,8 @@ module.exports.run = async (Discord, config, firebase, client, message, args) =>
 				"Four: You must answer by typing out the three letters in the order of number->sign->number. When using the sqrt expression, you must answer in the order of x->sqrt->y.\n"+
 				"The two players will take turns answering until the target number is made.\n"+
 				"The first player to make the target number gains 1 point. If you complete an equation with the sqrt operation, you will gain 2 points.\n"+
-				"The current round will end when one player answers correctly. The game will continue in this way until one player earns 10 points or more and wins the game.")
+				"The current round will end when one player answers correctly. The game will continue in this way until one player earns 10 points or more and wins the game.\n\n"+
+				`For the general help menu, try "${config.prefix}snh help".`)
 			.setThumbnail(`${config.bot_avatar_url}`);
 			await message.channel.send(embed);
 			return;

@@ -12,7 +12,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args) =>
 			}
 		}
 		await message.channel.send(cmdlist);
-		await message.channel.send("Complex commands have a help page, try using \"-[command] help\"!");
+		await message.channel.send(`Complex commands have a help page, try using "${config.prefix}[command] help"!`);
 	} catch(err) {
 		console.log(err.stack);
 	}
