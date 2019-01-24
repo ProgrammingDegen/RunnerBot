@@ -393,7 +393,7 @@ module.exports.run = async (Discord, config, firebase, client, message, args, mo
 			console.log("The bot broke in snh command center. Please report this issue to the bot creator.");
 			return;
 		}
-} catch(err) {
+	} catch(err) {
 		console.log(err.stack);
 	}
 }

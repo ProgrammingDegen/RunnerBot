@@ -14,6 +14,7 @@ const firebase = require("firebase");
 // firebaseconfig.json contains firebase config data
 const firebaseConfig = require("./firebaseconfig.json");
 firebase.initializeApp(firebaseConfig);
+
 // Get command list for command handler
 client.commands = new Discord.Collection();
 fs.readdir("./commands/", (err, files) => {
